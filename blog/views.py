@@ -3,6 +3,7 @@ from .models import Post
 from django.contrib.auth.models import User
 from pprint import pprint
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -56,6 +57,11 @@ def post_list(request):    # LOGIKA MOJEJ WEBSTRANKY
 
 def test(request):
     return render(request, 'blog/test.html', {})
+
+def post_detail(request, pk):
+    # Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)    # pk je id v databaze, PRIMARY KEY
+    return render(request, 'blog/post_detail.html', {'post':post})
 
 
 
